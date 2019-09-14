@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	 <typeAlias type="com.ma.entrty.User" alias="users"/> 
+	<package name="com.ma.entrty"/>
+	
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+		<!-- 使用jdbc事务管理-->
+			<transactionManager type="JDBC" />
+		<!-- 数据库连接池-->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/demo?characterEncoding=utf-8" />
+				<property name="username" value="root" />
+				<property name="password" value="1314520" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+	<!-- resource 是扫描全路径的xml -->
+ <mapper resource="com/ma/dao/userMapper.xml"/> 
+  
+<!-- 使用mapper接口类路径
+		注意：此种方法要求mapper(dao)接口名称和mapper映射文件名称相同，并且放在同一个目录中 (包中)-->
+		
+	<!-- <mapper class="com.ma.dao.userMappper"/>  -->
+		
+		<!-- 使用扫描包的形式加载mapper文件 -->
+  <!-- <package name="com.ma.dao"/>  -->
+
+	
+	</mappers>
+	
+	
+</configuration>

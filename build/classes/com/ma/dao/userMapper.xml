@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ma.dao.userMappper">
+<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+<!-- sql片段  提取公共的信息  在sql数据直接通过  <include refid="incoud"> 调用即可-->
+<sql id="incoud">
+id,username,password
+</sql>
+<select id="getfindall" resultType="users">
+select * from  user
+
+<!-- keyProperty="id" useGeneratedKeys="true"  表示主键返回 -->
+</select>
+<insert id="getinsert" parameterType="users" keyProperty="id" useGeneratedKeys="true">
+insert into  user (username,password) values(#{username},#{pass})
+
+</insert>
+
+<insert id="getinsert2" parameterType="UserVo" >
+insert into  user (username,password)values(#{user.username},#{user.pass})
+
+
+</insert>
+<select id="getcount" resultType="int">
+select count(*) from user
+</select>
+<select id="getList" resultType="users" parameterType="list">
+select <include refid="incoud"></include> from user
+<where>
+<foreach collection="list" open="and id in(" close=")" item="pid" separator=",">
+#{pid}
+</foreach>
+
+</where>
+
+
+</select>
+<delete id="getdelete" >
+delete from user 
+<where>
+<foreach collection="array" open="and id in(" close=")" separator="," item="id">
+#{id}
+</foreach>
+
+</where>
+
+</delete>
+</mapper>
