@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <sql id="incoud">
 id,username,password
 </sql>
-<select id="getfindall" resultType="users">
+<select id="getfindall1" resultType="users">
 select * from  user
 
 <!-- keyProperty="id" useGeneratedKeys="true"  表示主键返回 -->
